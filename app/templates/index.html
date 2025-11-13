@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>PPDB Chatbot</title>
+  <link rel="stylesheet" href="../static/style.css"/>
+</head>
+<body>
+  <div class="chat-box">
+    <!-- Tambah logo -->
+    <img src="{{ url_for('static', filename='TexBot.png') }}" alt="Logo TexBot" class="logo">
+    
+    <h2>🤖 Chatbot PPDB</h2>
+
+    <div id="chat-window">
+      {% for chat in chat_history %}
+        <div class="message user"><b>Anda:</b> {{ chat.user }}</div>
+        <div class="message bot"><b>Bot:</b> {{ chat.bot|safe }}</div>
+      {% endfor %}
+    </div>
+
+    <form method="POST" action="{{ url_for('index') }}" class="input-area">
+      <input type="text" name="question" placeholder="Ketik pertanyaan..." required>
+      <button type="submit">Kirim</button>
+    </form>
+
+    <form method="POST" action="{{ url_for('reset') }}">
+      <button type="submit" class="reset-btn">🔄 Chat Baru</button>
+    </form>
+  </div>
+</body>
+</html>
